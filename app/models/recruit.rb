@@ -6,7 +6,7 @@
 #  title          :string           not null
 #  practice_place :string
 #  practice_time  :string
-#  free_text      :text
+#  description    :text
 #  published_from :datetime         not null
 #  published_to   :datetime         not null
 #  team_id        :integer          not null
@@ -36,6 +36,6 @@ class Recruit < ApplicationRecord
   # TODO 誰かどうにかして。。。　あと複数キーワード対応も
   scope :search_freeword, -> word {
     w = "%#{word}%"
-    joins(:team).where("(recruits.title LIKE ?) or (recruits.free_text LIKE ?) or (recruits.practice_place LIKE ?) or (recruits.practice_time LIKE ?) or (teams.name LIKE ?)", w, w, w, w, w)
+    joins(:team).where("(recruits.title LIKE ?) or (recruits.description LIKE ?) or (recruits.practice_place LIKE ?) or (recruits.practice_time LIKE ?) or (teams.name LIKE ?)", w, w, w, w, w)
   }
 end

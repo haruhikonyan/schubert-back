@@ -7,8 +7,8 @@
 #  password_digest :string           not null
 #  mail            :string
 #  url             :string
-#  free_text       :text
-#  is_public       :boolean          default(FALSE)
+#  description     :text
+#  is_published    :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
