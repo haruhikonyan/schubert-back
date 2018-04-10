@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     resources :recruits, except:[:edit]
     post 'recruits/:id/edit', to: 'recruits#edit', as: 'edit_recruit'
+
     resources :types, onry:[:index, :show]
+    resources :instruments, onry:[:index, :show]
+    resources :instrument_categories, onry:[:index, :show]
   end
 end

@@ -1,3 +1,1 @@
-json.id type.id
-json.id type.name
-
+json.extract! type, :id, :name
