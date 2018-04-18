@@ -1,1 +1,1 @@
-json.partial! "types/type", type: @type
+json.partial! "api/types/type", type: @type
