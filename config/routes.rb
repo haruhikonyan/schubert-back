@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :types, onry:[:index, :show]
     resources :instruments, onry:[:index, :show]
     resources :instrument_categories, onry:[:index, :show]
+    resources :regions, onry:[:index, :show]
   end
 end
