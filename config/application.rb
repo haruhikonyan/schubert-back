@@ -29,7 +29,6 @@ module SchubertBack
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    # TODO 本番用の設定を書く
-    config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', '本番用の設定')
+    config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'schubert-front.herokuapp.com')
   end
 end
