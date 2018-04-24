@@ -16,7 +16,7 @@
 
 class Recruit < ApplicationRecord
   belongs_to :team
-
+  accepts_nested_attributes_for :team
   has_many :recruit_instruments
   has_many :instruments, :through => :recruit_instruments
 
