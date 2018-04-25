@@ -1,1 +1,1 @@
-json.extract! recruit, :id, :created_at, :updated_at
+json.extract! recruit, *(Recruit.attribute_names - ['created_at', 'updated_at'])
