@@ -27,7 +27,7 @@ class Api::RecruitsController < ApplicationController
   # PATCH/PUT /recruits/1
   # PATCH/PUT /recruits/1.json
   def update
-    if @recruit.update(recruit_params)
+    if @recruit.update(recruit_savable_params)
       render :show, status: :ok
     else
       render json: @recruit.errors, status: :unprocessable_entity

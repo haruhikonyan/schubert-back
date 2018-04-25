@@ -15,7 +15,7 @@ class Api::TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(team_params)
+    @team = Team.new(team_savable_params)
 
     if @team.save
       render :show, status: :created
@@ -27,7 +27,7 @@ class Api::TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-    if @team.update(team_params)
+    if @team.update(team_savable_params)
       render :show, status: :ok
     else
       render json: @team.errors, status: :unprocessable_entity
@@ -47,7 +47,14 @@ class Api::TeamsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def team_params
-      params.fetch(:team, {})
+    # 破壊的なのでデバッグ時注意    
+    def team_savable_params
+      team_params = params[:team]
+      team_params[:type_ids] = team_params[:types].pluck(:id)
+      team_params.delete :types
+      team_params[:region_ids] = team_params[:regions].pluck(:id)
+      team_params.delete :regions
+      
+      team_params.try!(:permit!).to_h.transform_keys!(&:underscore)
     end
 end
