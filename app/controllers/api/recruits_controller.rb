@@ -15,10 +15,10 @@ class Api::RecruitsController < ApplicationController
   # POST /recruits
   # POST /recruits.json
   def create
-    @recruit = Recruit.new(recruit_params)
+    @recruit = Recruit.new(recruit_savable_params)
 
     if @recruit.save
-      render :show, status: :created, location: @recruit
+      render :show, status: :created
     else
       render json: @recruit.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Api::RecruitsController < ApplicationController
   # PATCH/PUT /recruits/1.json
   def update
     if @recruit.update(recruit_params)
-      render :show, status: :ok, location: @recruit
+      render :show, status: :ok
     else
       render json: @recruit.errors, status: :unprocessable_entity
     end
@@ -48,9 +48,18 @@ class Api::RecruitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     # 破壊的なのでデバッグ時注意
-    def recruit_params
+    def recruit_savable_params
       recruit_params = params[:recruit]
+      recruit_params[:instrument_ids] = recruit_params[:instruments].pluck(:id)
+      recruit_params.delete :instruments
+      team_params = recruit_params[:team]
+      team_params[:type_ids] = team_params[:types].pluck(:id)
+      team_params.delete :types
+      team_params[:region_ids] = team_params[:regions].pluck(:id)
+      team_params.delete :regions
+      
       recruit_params[:team_attributes] = recruit_params.delete :team
+      
       recruit_params.try!(:permit!).to_h.transform_keys!(&:underscore)
     end
 end
