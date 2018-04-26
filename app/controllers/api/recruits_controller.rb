@@ -1,4 +1,5 @@
 class Api::RecruitsController < ApplicationController
+  before_action :snakeize_params, only: [:create]
   before_action :set_recruit, only: [:show, :update, :destroy]
 
   # GET /recruits
@@ -47,7 +48,13 @@ class Api::RecruitsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    #def recruit_params
+    #  params.fetch(:recruit, {})
+    #end
     def recruit_params
-      params.fetch(:recruit, {})
+      params.require(:recruit).permit(
+        :published_from, :published_to,
+        { :instruments => [:id, :name] }, :title, :practice_place, :practice_time, :description,
+        { :team => [:name, :password, :mail, :url, { :regions => [:id, :name] }, { :types => [:id, :name] }] })
     end
 end
