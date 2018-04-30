@@ -3,7 +3,6 @@ json.team do
   json.partial! "api/teams/team", team: recruit.team
 end
 json.instruments do
-  # json.array! @instruments, partial: 'api/instruments/instrument', as: :instrument
-  # こんな感じにしたいがエラー出る
-  json.array! recruit.instruments
+  # partial: 'api/instruments/instrument' を指定したい
+  json.array! recruit.instruments, :id, :name, :short_name
 end

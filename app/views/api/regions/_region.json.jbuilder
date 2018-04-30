@@ -1,1 +1,1 @@
-json.extract! region, :id, :name
+json.extract! region, *(Region.attribute_names - ['created_at', 'updated_at'])

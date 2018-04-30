@@ -1,1 +1,1 @@
-json.extract! instrument, :id, :name
+json.extract! instrument, *(Instrument.attribute_names - ['created_at', 'updated_at'])
