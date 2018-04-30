@@ -1,1 +1,1 @@
-json.partial! "instruments/instrument", instrument: @instrument
+json.partial! "api/instruments/instrument", instrument: @instrument
