@@ -17,6 +17,7 @@ class Api::RecruitsController < ApplicationController
   # POST /recruits.json
   def create
     @recruit = Recruit.new(recruit_params)
+    @recruit.instruments = Instruments.find(params[:instruments])
 
     if @recruit.save
       render :show, status: :created, location: @recruit
