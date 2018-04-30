@@ -30,5 +30,8 @@ module SchubertBack
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'schubert-front.herokuapp.com')
+
+    # api レスポンスをすべてキャメルケースに変換
+    Jbuilder.key_format camelize: :lower
   end
 end
