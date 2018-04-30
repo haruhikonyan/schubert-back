@@ -3,5 +3,5 @@ json.team do
   json.partial! "api/teams/team", team: recruit.team
 end
 json.instruments do
-  json.partial! 'api/instruments/instrument, collection: recruit.instruments, as: :instrument
+  json.partial! 'api/instruments/instrument', collection: recruit.instruments, as: :instrument
 end
