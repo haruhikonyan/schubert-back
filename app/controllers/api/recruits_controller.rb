@@ -55,7 +55,7 @@ class Api::RecruitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     # 破壊的なのでデバッグ時注意
     def recruit_savable_params
-      recruit_params = params[:recruit]
+      recruit_params = params[:recruit].try!(:permit!)
       recruit_params[:instrument_ids] = recruit_params[:instruments].pluck(:id)
       recruit_params.delete :instruments
       team_params = recruit_params[:team]
@@ -65,7 +65,6 @@ class Api::RecruitsController < ApplicationController
       team_params.delete :regions
       
       recruit_params[:team_attributes] = recruit_params.delete :team
-      
-      recruit_params.try!(:permit!).to_h.transform_keys!(&:underscore)
+      recruit_params
     end
 end

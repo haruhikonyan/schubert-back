@@ -49,12 +49,11 @@ class Api::TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     # 破壊的なのでデバッグ時注意    
     def team_savable_params
-      team_params = params[:team]
+      team_params = params[:team].try!(:permit!)
       team_params[:type_ids] = team_params[:types].pluck(:id)
       team_params.delete :types
       team_params[:region_ids] = team_params[:regions].pluck(:id)
       team_params.delete :regions
-      
-      team_params.try!(:permit!).to_h.transform_keys!(&:underscore)
+      team_params
     end
 end
