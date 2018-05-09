@@ -33,7 +33,8 @@ class Recruit < ApplicationRecord
     where("published_from <= ?", now).where("published_to >= ?", now)
   }
 
-  # TODO 誰かどうにかして。。。　あと複数キーワード対応も
+  # TODO 複数キーワード対応
+  # ゆくゆくは ES 入れたい
   scope :search_freeword, -> word {
     w = "%#{word}%"
     joins(:team).where("(recruits.title LIKE ?) or (recruits.description LIKE ?) or (recruits.practice_place LIKE ?) or (recruits.practice_time LIKE ?) or (teams.name LIKE ?)", w, w, w, w, w)

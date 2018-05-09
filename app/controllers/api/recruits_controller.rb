@@ -4,7 +4,13 @@ class Api::RecruitsController < ApplicationController
   # GET /recruits
   # GET /recruits.json
   def index
-    @recruits = Recruit.all
+    query = Recruit.is_published
+    query = query.has_type_id(params[:type_id]) if params[:type_id].present?
+    query = query.has_instrument_id(params[:instrument_id]) if params[:instrument_id].present?
+    query = query.search_freeword(params[:freeword]) if params[:freeword].present?
+
+    # オフセットに対応させる
+    @recruits = query
   end
 
   # GET /recruits/1
