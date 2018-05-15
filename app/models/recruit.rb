@@ -20,12 +20,12 @@ class Recruit < ApplicationRecord
   has_many :recruit_instruments
   has_many :instruments, :through => :recruit_instruments
 
-  scope :has_instrument_id, -> instrument_id {
-    joins(:instruments).where('instruments.id = ?', instrument_id)
+  scope :has_instrument_ids, -> instrument_ids {
+    joins(:instruments).where('instruments.id IN (?)', instrument_ids)
   }
 
-  scope :has_type_id, -> type_id {
-    joins(team: :types).where('types.id = ?', type_id)
+  scope :has_type_ids, -> type_ids {
+    joins(team: :types).where('types.id IN (?)', type_ids)
   }
   # もっとスマートにかける？
   scope :is_published, -> {
