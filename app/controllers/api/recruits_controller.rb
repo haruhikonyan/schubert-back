@@ -7,7 +7,7 @@ class Api::RecruitsController < ApplicationController
     query = Recruit.is_published
     query = query.has_type_id(params[:type_id]) if params[:type_id].present?
     query = query.has_instrument_id(params[:instrument_id]) if params[:instrument_id].present?
-    query = query.search_freeword(params[:freeword]) if params[:freeword].present?
+    query = query.search_free_word(params[:free_word]) if params[:free_word].present?
 
     # オフセットに対応させる
     @recruits = query
