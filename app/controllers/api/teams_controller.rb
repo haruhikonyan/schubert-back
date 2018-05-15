@@ -1,4 +1,7 @@
 class Api::TeamsController < ApplicationController
+  require 'jwt'
+
+
   before_action :set_team, only: [:show, :update, :destroy]
 
   # GET /teams
@@ -38,6 +41,28 @@ class Api::TeamsController < ApplicationController
   # DELETE /teams/1.json
   def destroy
     @team.destroy
+  end
+
+  def auth
+    @team = Team.first
+    @team.authenticate('pass')
+    payload = { teamId: @team.id }
+    
+    # IMPORTANT: set nil as password parameter
+    @token = JWT.encode payload, nil, 'none'
+    
+    # Set password to nil and validation to false otherwise this won't work
+    decoded_token = JWT.decode @token, nil, false
+    
+    # Array
+    # [
+    #   {"data"=>"test"}, # payload
+    #   {"alg"=>"none"} # header
+    # ]
+    puts decoded_token
+
+    return @token
+
   end
 
   private

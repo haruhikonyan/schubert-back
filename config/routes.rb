@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     # TODO 絞ったり新しく作ったり
     resources :recruits
     resources :teams
+    get '/auth/:pass', to: 'teams#auth'
 
     resources :types, onry:[:index, :show]
     resources :instruments, onry:[:index, :show]
