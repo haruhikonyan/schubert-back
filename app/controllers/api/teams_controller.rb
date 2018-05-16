@@ -2,7 +2,7 @@ class Api::TeamsController < ApplicationController
   require 'jwt'
 
 
-  before_action :set_team, only: [:show, :update, :destroy]
+  before_action :set_team, only: [:show, :update, :destroy, :login]
 
   # GET /teams
   # GET /teams.json
@@ -43,26 +43,9 @@ class Api::TeamsController < ApplicationController
     @team.destroy
   end
 
-  def auth
-    @team = Team.first
-    @team.authenticate('pass')
-    payload = { teamId: @team.id }
-    
-    # IMPORTANT: set nil as password parameter
-    @token = JWT.encode payload, nil, 'none'
-    
-    # Set password to nil and validation to false otherwise this won't work
-    decoded_token = JWT.decode @token, nil, false
-    
-    # Array
-    # [
-    #   {"data"=>"test"}, # payload
-    #   {"alg"=>"none"} # header
-    # ]
-    puts decoded_token
-
-    return @token
-
+  def login
+    # 何を返すべき？    
+    render json: false, status: :unauthorized unless @token = @team.login(params[:password])
   end
 
   private
