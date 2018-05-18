@@ -26,11 +26,14 @@ class Team < ApplicationRecord
   scope :is_public, -> {
     where(is_public: true)
   }
+  
+  # jwt token の有効期間
+  JWT_TOKEN_EXPIRATION_DATE = Time.now + 1.week
 
   # 自分自身のパスワードと一致すれば token を返す
   def login(password)
     if self.authenticate(password)
-      payload = { team_id: self.id }
+      payload = { team_id: self.id, exp: JWT_TOKEN_EXPIRATION_DATE.to_i }
     
       JWT.encode payload, nil, 'none'
   

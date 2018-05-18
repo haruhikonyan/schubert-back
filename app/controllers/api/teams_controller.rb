@@ -44,7 +44,7 @@ class Api::TeamsController < ApplicationController
   end
 
   def login
-    # 何を返すべき？    
+    # 何を返すべき？
     render json: false, status: :unauthorized unless @token = @team.login(params[:password])
   end
 
