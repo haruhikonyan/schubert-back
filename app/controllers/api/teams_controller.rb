@@ -30,7 +30,14 @@ class Api::TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-    if @team.update(team_savable_params)
+    # TODO 別のサービスクラスなりなんなりに共通化したい
+    jwt_bearer_token ||= if request.headers['Authorization'].present?
+      scheme, token = request.headers['Authorization'].split(' ')
+      (scheme == 'Bearer' ? token : nil)
+    end
+    unless @team.auth(jwt_bearer_token)
+      render json: false, status: :unauthorized
+    elsif @team.update(team_savable_params)
       render :show, status: :ok
     else
       render json: @team.errors, status: :unprocessable_entity
