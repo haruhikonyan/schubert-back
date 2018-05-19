@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     # TODO 絞ったり新しく作ったり
     resources :recruits
     resources :teams
+    post 'teams/:id/login', to: 'teams#login'
 
     resources :types, onry:[:index, :show]
     resources :instruments, onry:[:index, :show]

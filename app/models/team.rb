@@ -26,4 +26,27 @@ class Team < ApplicationRecord
   scope :is_public, -> {
     where(is_public: true)
   }
+  
+  # jwt token の有効期間
+  JWT_TOKEN_EXPIRATION_DATE = Time.now + 1.week
+
+  # 自分自身のパスワードと一致すれば token を返す
+  def login(password)
+    if self.authenticate(password)
+      payload = { team_id: self.id, exp: JWT_TOKEN_EXPIRATION_DATE.to_i }
+    
+      JWT.encode payload, nil, 'none'
+  
+    else
+      false
+    end
+  end
+
+  # 受け取った token の id と自分の id が一致すれば認証成功とし、true を返す
+  def auth(token)
+    # Set password to nil and validation to false otherwise this won't work
+    decoded_token = JWT.decode token, nil, false
+    # もっと良いtokenからのidの取得方法があるはず
+    decoded_token.first["team_id"] == self.id
+  end
 end
