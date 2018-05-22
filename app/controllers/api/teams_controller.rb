@@ -35,7 +35,7 @@ class Api::TeamsController < ApplicationController
       scheme, token = request.headers['Authorization'].split(' ')
       (scheme == 'Bearer' ? token : nil)
     end
-    unless @team.auth(jwt_bearer_token)
+    if !@team.auth(jwt_bearer_token)
       render json: false, status: :unauthorized
     elsif @team.update(team_savable_params)
       render :show, status: :ok
