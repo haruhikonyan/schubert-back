@@ -22,6 +22,7 @@ class Api::RecruitsController < ApplicationController
   # POST /recruits
   # POST /recruits.json
   def create
+    # TODO 既存 team を含めて保存する場合は認証に対応させる
     @recruit = Recruit.new(recruit_savable_params)
 
     if @recruit.save
@@ -60,12 +61,18 @@ class Api::RecruitsController < ApplicationController
       recruit_params[:instrument_ids] = recruit_params[:instruments].pluck(:id)
       recruit_params.delete :instruments
       team_params = recruit_params[:team]
-      team_params[:type_ids] = team_params[:types].pluck(:id)
-      team_params.delete :types
-      team_params[:region_ids] = team_params[:regions].pluck(:id)
-      team_params.delete :regions
-      
-      recruit_params[:team_attributes] = recruit_params.delete :team
-      recruit_params
+      # tema.id がある場合
+      if params[:recruit][:team][:id].present?
+        recruit_params[:team_id] = params[:recruit][:team][:id]
+        recruit_params.delete :team
+      else
+        team_params[:type_ids] = team_params[:types].pluck(:id)
+        team_params.delete :types
+        team_params[:region_ids] = team_params[:regions].pluck(:id)
+        team_params.delete :regions
+        
+        recruit_params[:team_attributes] = recruit_params.delete :team
+      end
+      recruit_params      
     end
 end
