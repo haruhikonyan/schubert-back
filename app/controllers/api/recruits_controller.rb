@@ -11,7 +11,7 @@ class Api::RecruitsController < ApplicationController
     query = query.search_free_word(params[:free_word]) if params[:free_word].present?
 
     # オフセットに対応させる
-    @recruits = query
+    @recruits = query.order(updated_at: :desc)
   end
 
   # GET /recruits/1

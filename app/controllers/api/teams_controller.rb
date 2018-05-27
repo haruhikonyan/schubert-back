@@ -7,7 +7,7 @@ class Api::TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = Team.order(updated_at: :desc)
   end
 
   # GET /teams/1
