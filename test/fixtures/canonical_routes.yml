@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  canonical_routable: one
+  canonical_routable_type: Canonical routable
+  path: MyString
+
+two:
+  canonical_routable: two
+  canonical_routable_type: Canonical routable
+  path: MyString
