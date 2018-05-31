@@ -8,8 +8,9 @@
 #  path                    :string
 #  label                   :string
 #  category                :string
-#  orderInCategory         :integer
-#  isListedOnTop           :boolean
+#  order_in_Category       :integer
+#  is_listed_on_top        :boolean
+#  is_listed_on_model_top  :boolean
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #

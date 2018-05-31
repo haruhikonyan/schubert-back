@@ -7,6 +7,7 @@ class CreateCanonicalRoutes < ActiveRecord::Migration[5.1]
       t.string :category
       t.integer :order_in_Category
       t.boolean :is_listed_on_top
+      t.boolean :is_listed_on_model_top      
       t.timestamps
     end
   end

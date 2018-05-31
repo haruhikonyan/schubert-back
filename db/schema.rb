@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(version: 20180531093845) do
     t.string "path"
     t.string "label"
     t.string "category"
-    t.integer "orderInCategory"
-    t.boolean "isListedOnTop"
+    t.integer "order_in_Category"
+    t.boolean "is_listed_on_top"
+    t.boolean "is_listed_on_model_top"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["canonical_routable_type", "canonical_routable_id"], name: "index_canonical_routes"
