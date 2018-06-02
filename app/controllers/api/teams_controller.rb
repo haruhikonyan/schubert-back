@@ -1,8 +1,8 @@
 class Api::TeamsController < ApplicationController
   require 'jwt'
 
-
-  before_action :set_team, only: [:show, :update, :destroy, :login]
+  before_action :authenticate!, only: [:update, :destroy]
+  before_action :set_team, only: [:show, :login]
 
   # GET /teams
   # GET /teams.json
@@ -30,29 +30,28 @@ class Api::TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-    # TODO 別のサービスクラスなりなんなりに共通化したい
-    jwt_bearer_token ||= if request.headers['Authorization'].present?
-      scheme, token = request.headers['Authorization'].split(' ')
-      (scheme == 'Bearer' ? token : nil)
-    end
-    if !@team.auth(jwt_bearer_token)
+    if !@current_team
       render json: false, status: :unauthorized
-    elsif @team.update(team_savable_params)
+    elsif @current_team.update(team_savable_params)
       render :show, status: :ok
     else
-      render json: @team.errors, status: :unprocessable_entity
+      render json: @current_team.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
-    @team.destroy
+    @current_team.destroy
   end
 
   def login
-    # 何を返すべき？
-    render json: false, status: :unauthorized unless @token = @team.login(params[:password])
+    if @team.authenticate(params[:password])
+      @token = Jwt::TokenProvider.refresh_token @team
+      render :login, status: :ok
+    else
+      render json: false, status: :unauthorized
+    end
   end
 
   private

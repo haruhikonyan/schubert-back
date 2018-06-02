@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include UserAuthenticator
   before_action :snakeize_params
 
   protected
