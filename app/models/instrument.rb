@@ -15,6 +15,9 @@ class Instrument < ApplicationRecord
   has_many :recruit_instruments
   has_many :recruits, :through => :recruit_instruments
 
+  has_many :canonical_route_instrument_for_recruits_relations
+  has_many :canonical_route_instrument_for_recruits, :through => :canonical_route_instrument_for_recruits_relations
+
   belongs_to :instrument_category
 
   scope :id_is, -> id {

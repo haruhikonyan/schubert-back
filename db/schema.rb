@@ -10,10 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325050054) do
+ActiveRecord::Schema.define(version: 20180531093845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "canonical_route_instruments_for_recruits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "canonical_route_instruments_for_recruits_relations", force: :cascade do |t|
+    t.bigint "canonical_route_instruments_for_recruit_id", null: false
+    t.bigint "instrument_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["canonical_route_instruments_for_recruit_id"], name: "index_crifrr_on_canonical_route_instruments_for_recruit_id"
+    t.index ["instrument_id"], name: "index_crifrr_on_instrument_id"
+  end
+
+  create_table "canonical_route_region_for_recruits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "canonical_routes", force: :cascade do |t|
+    t.string "canonical_routable_type"
+    t.bigint "canonical_routable_id"
+    t.string "path"
+    t.string "label"
+    t.string "category"
+    t.integer "order_in_Category"
+    t.boolean "is_listed_on_top"
+    t.boolean "is_listed_on_model_top"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["canonical_routable_type", "canonical_routable_id"], name: "index_canonical_routes"
+  end
 
   create_table "instrument_categories", id: :serial, force: :cascade do |t|
     t.string "name"
