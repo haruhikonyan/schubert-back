@@ -1,5 +1,4 @@
 class Api::TeamsController < ApplicationController
-  require 'jwt'
 
   before_action :authenticate!, only: [:update, :destroy]
   before_action :set_team, only: [:show, :login]
@@ -30,6 +29,7 @@ class Api::TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
+    # TODO エラーハンドリングを共通化する
     if !@current_team
       render json: false, status: :unauthorized
     elsif @current_team.update(team_savable_params)

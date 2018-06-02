@@ -1,4 +1,5 @@
 class Api::RecruitsController < ApplicationController
+  before_action :authenticate!, only: [:update, :destroy]
   before_action :set_recruit, only: [:show, :update, :destroy]
 
   # GET /recruits
@@ -35,7 +36,10 @@ class Api::RecruitsController < ApplicationController
   # PATCH/PUT /recruits/1
   # PATCH/PUT /recruits/1.json
   def update
-    if @recruit.update(recruit_savable_params)
+    # TODO エラーハンドリングを共通化する
+    if @current_team&.id != @recruit.team.id
+      render json: false, status: :unauthorized
+    elsif @recruit.update(recruit_savable_params)
       render :show, status: :ok
     else
       render json: @recruit.errors, status: :unprocessable_entity
@@ -45,7 +49,12 @@ class Api::RecruitsController < ApplicationController
   # DELETE /recruits/1
   # DELETE /recruits/1.json
   def destroy
-    @recruit.destroy
+    # TODO エラーハンドリングを共通化する
+    if @current_team&.id != @recruit.team.id
+      render json: false, status: :unauthorized
+    else
+      @recruit.destroy
+    end
   end
 
   private
