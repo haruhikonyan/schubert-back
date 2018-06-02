@@ -14,6 +14,8 @@ ActiveRecord::Schema.define(version: 20180531093845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+  enable_extension "pgcrypto"
 
   create_table "canonical_route_instruments_for_recruits", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -75,14 +77,14 @@ ActiveRecord::Schema.define(version: 20180531093845) do
     t.index ["recruit_id"], name: "index_recruit_instruments_on_recruit_id"
   end
 
-  create_table "recruits", id: :serial, force: :cascade do |t|
+  create_table "recruits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.string "practice_place"
     t.string "practice_time"
     t.text "description"
     t.datetime "published_from", null: false
     t.datetime "published_to", null: false
-    t.integer "team_id", null: false
+    t.uuid "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_recruits_on_team_id"
@@ -114,7 +116,7 @@ ActiveRecord::Schema.define(version: 20180531093845) do
     t.index ["type_id"], name: "index_team_types_on_type_id"
   end
 
-  create_table "teams", id: :serial, force: :cascade do |t|
+  create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "password_digest", null: false
     t.string "mail"
@@ -132,4 +134,5 @@ ActiveRecord::Schema.define(version: 20180531093845) do
     t.index ["name"], name: "index_types_on_name"
   end
 
+  add_foreign_key "recruits", "teams"
 end

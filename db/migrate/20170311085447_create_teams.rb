@@ -1,6 +1,6 @@
-class CreateTeams < ActiveRecord::Migration[5.0]
+class CreateTeams < ActiveRecord::Migration[5.1]
   def change
-    create_table :teams do |t|
+    create_table :teams, id: :uuid do |t|
       t.string :name, null: false
       t.string :password_digest, null: false
       t.string :mail
