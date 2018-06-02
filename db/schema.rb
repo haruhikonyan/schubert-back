@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 20180531093845) do
     t.index ["name"], name: "index_instruments_on_name"
   end
 
-  create_table "recruit_instruments", id: :serial, force: :cascade do |t|
-    t.integer "recruit_id", null: false
-    t.integer "instrument_id", null: false
+  create_table "recruit_instruments", force: :cascade do |t|
+    t.uuid "recruit_id", null: false
+    t.bigint "instrument_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["instrument_id"], name: "index_recruit_instruments_on_instrument_id"
@@ -98,18 +98,18 @@ ActiveRecord::Schema.define(version: 20180531093845) do
     t.index ["name"], name: "index_regions_on_name"
   end
 
-  create_table "team_regions", id: :serial, force: :cascade do |t|
-    t.integer "team_id", null: false
-    t.integer "region_id", null: false
+  create_table "team_regions", force: :cascade do |t|
+    t.uuid "team_id", null: false
+    t.bigint "region_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["region_id"], name: "index_team_regions_on_region_id"
     t.index ["team_id"], name: "index_team_regions_on_team_id"
   end
 
-  create_table "team_types", id: :serial, force: :cascade do |t|
-    t.integer "team_id", null: false
-    t.integer "type_id", null: false
+  create_table "team_types", force: :cascade do |t|
+    t.uuid "team_id", null: false
+    t.bigint "type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_team_types_on_team_id"
