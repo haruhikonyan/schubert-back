@@ -33,6 +33,8 @@ class Api::TeamsController < ApplicationController
     if !@current_team
       render json: false, status: :unauthorized
     elsif @current_team.update(team_savable_params)
+      # TODO わざわざ入れ替えるのすこぶる微妙なのでどうにかする
+      @team = @current_team
       render :show, status: :ok
     else
       render json: @current_team.errors, status: :unprocessable_entity
