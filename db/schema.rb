@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603033113) do
+ActiveRecord::Schema.define(version: 20180603035907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20180603033113) do
     t.index ["canonical_routable_type", "canonical_routable_id"], name: "index_canonical_routes"
   end
 
+  create_table "concert_conductors", force: :cascade do |t|
+    t.uuid "concert_id", null: false
+    t.bigint "conductor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["concert_id"], name: "index_concert_conductors_on_concert_id"
+    t.index ["conductor_id"], name: "index_concert_conductors_on_conductor_id"
+  end
+
   create_table "concerts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.date "date", null: false
@@ -60,6 +69,14 @@ ActiveRecord::Schema.define(version: 20180603033113) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_concerts_on_team_id"
+  end
+
+  create_table "conductors", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "holes", force: :cascade do |t|

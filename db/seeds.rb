@@ -50,3 +50,5 @@ Instrument.create(name: 'コントラバス', sort_number: 341, short_name: 'Cb'
 Instrument.create(name: 'パーカッション', sort_number: 411, short_name: 'Perc', instrument_category_id: 4)
 
 Hole.create(name: '東京芸術劇場', address:'東京都豊島区西池袋1-8-1', url: 'http://www.geigeki.jp/', region_id: 1)
+
+Conductor.create(name: '小林研一郎', description: '炎のコバケン', url: 'http://www.it-japan.co.jp/kobaken/index2.htm')

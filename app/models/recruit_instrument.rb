@@ -10,6 +10,6 @@
 #
 
 class RecruitInstrument < ApplicationRecord
-    belongs_to :recruit
-    belongs_to :instrument
+  belongs_to :recruit
+  belongs_to :instrument
 end
