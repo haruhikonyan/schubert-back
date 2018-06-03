@@ -2,7 +2,7 @@
 #
 # Table name: teams
 #
-#  id              :integer          not null, primary key
+#  id              :uuid             not null, primary key
 #  name            :string           not null
 #  password_digest :string           not null
 #  mail            :string
@@ -22,6 +22,8 @@ class Team < ApplicationRecord
   has_many :types, :through => :team_types
   has_many :team_regions
   has_many :regions, :through => :team_regions
+
+  has_many :concerts
 
   scope :is_public, -> {
     where(is_public: true)

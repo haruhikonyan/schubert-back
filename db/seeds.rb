@@ -49,3 +49,14 @@ Instrument.create(name: 'チェロ', sort_number: 331, short_name: 'Vc', instrum
 Instrument.create(name: 'コントラバス', sort_number: 341, short_name: 'Cb', instrument_category_id: 3)
 Instrument.create(name: 'パーカッション', sort_number: 411, short_name: 'Perc', instrument_category_id: 4)
 
+Hole.create(name: '東京芸術劇場', address:'東京都豊島区西池袋1-8-1', url: 'http://www.geigeki.jp/', region_id: 1)
+
+Conductor.create(name: '小林研一郎', description: '炎のコバケン', url: 'http://www.it-japan.co.jp/kobaken/index2.htm')
+
+Country.create(name: 'ドイツ', description: 'バッハ、ベートーヴェン、ブラームスとか')
+
+Composer.create(last_name: 'ブラームス', full_name: 'ヨハネス・ブラームス', description: 'ドイツ三大Bのうちの一人', countries: [Country.find_by(name: 'ドイツ')])
+
+Tune.create(title: '交響曲第1番 ハ短調 op.68', description: 'ブラームスの初めての交響曲', composer: Composer.find_by(last_name: 'ブラームス'))
+
+Solist.create(name: '北村源三', url: 'https://ja.wikipedia.org/wiki/%E5%8C%97%E6%9D%91%E6%BA%90%E4%B8%89', description: '元NHK交響楽団首席トランペット奏者', instrument: Instrument.find_by(name: 'トランペット'))
