@@ -49,3 +49,4 @@ Instrument.create(name: 'チェロ', sort_number: 331, short_name: 'Vc', instrum
 Instrument.create(name: 'コントラバス', sort_number: 341, short_name: 'Cb', instrument_category_id: 3)
 Instrument.create(name: 'パーカッション', sort_number: 411, short_name: 'Perc', instrument_category_id: 4)
 
+Hole.create(name: '東京芸術劇場', address:'東京都豊島区西池袋1-8-1', url: 'http://www.geigeki.jp/', region_id: 1)
