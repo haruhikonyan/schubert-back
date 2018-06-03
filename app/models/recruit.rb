@@ -2,14 +2,14 @@
 #
 # Table name: recruits
 #
-#  id             :integer          not null, primary key
+#  id             :uuid             not null, primary key
 #  title          :string           not null
 #  practice_place :string
 #  practice_time  :string
 #  description    :text
 #  published_from :datetime         not null
 #  published_to   :datetime         not null
-#  team_id        :integer          not null
+#  team_id        :uuid             not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

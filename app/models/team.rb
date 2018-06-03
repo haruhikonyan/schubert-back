@@ -2,7 +2,7 @@
 #
 # Table name: teams
 #
-#  id              :integer          not null, primary key
+#  id              :uuid             not null, primary key
 #  name            :string           not null
 #  password_digest :string           not null
 #  mail            :string
