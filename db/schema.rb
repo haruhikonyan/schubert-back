@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603035907) do
+ActiveRecord::Schema.define(version: 20180603071119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,23 @@ ActiveRecord::Schema.define(version: 20180603035907) do
     t.index ["canonical_routable_type", "canonical_routable_id"], name: "index_canonical_routes"
   end
 
+  create_table "composer_countries", force: :cascade do |t|
+    t.bigint "composer_id", null: false
+    t.bigint "country_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["composer_id"], name: "index_composer_countries_on_composer_id"
+    t.index ["country_id"], name: "index_composer_countries_on_country_id"
+  end
+
+  create_table "composers", force: :cascade do |t|
+    t.string "last_name", null: false
+    t.string "full_name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "concert_conductors", force: :cascade do |t|
     t.uuid "concert_id", null: false
     t.bigint "conductor_id", null: false
@@ -75,6 +92,13 @@ ActiveRecord::Schema.define(version: 20180603035907) do
     t.string "name", null: false
     t.string "description"
     t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -138,6 +162,36 @@ ActiveRecord::Schema.define(version: 20180603035907) do
     t.index ["name"], name: "index_regions_on_name"
   end
 
+  create_table "repertoires", force: :cascade do |t|
+    t.string "arranger"
+    t.text "description"
+    t.uuid "concert_id", null: false
+    t.bigint "tune_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["concert_id"], name: "index_repertoires_on_concert_id"
+    t.index ["tune_id"], name: "index_repertoires_on_tune_id"
+  end
+
+  create_table "solist_repertoires", force: :cascade do |t|
+    t.bigint "solist_id", null: false
+    t.bigint "repertoire_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repertoire_id"], name: "index_solist_repertoires_on_repertoire_id"
+    t.index ["solist_id"], name: "index_solist_repertoires_on_solist_id"
+  end
+
+  create_table "solists", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url"
+    t.text "description"
+    t.bigint "instrument_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instrument_id"], name: "index_solists_on_instrument_id"
+  end
+
   create_table "team_regions", force: :cascade do |t|
     t.uuid "team_id", null: false
     t.bigint "region_id", null: false
@@ -167,6 +221,15 @@ ActiveRecord::Schema.define(version: 20180603035907) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tunes", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.bigint "composer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["composer_id"], name: "index_tunes_on_composer_id"
+  end
+
   create_table "types", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -176,4 +239,5 @@ ActiveRecord::Schema.define(version: 20180603035907) do
 
   add_foreign_key "concerts", "teams"
   add_foreign_key "recruits", "teams"
+  add_foreign_key "repertoires", "concerts"
 end
