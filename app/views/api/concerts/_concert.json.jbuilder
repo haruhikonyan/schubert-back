@@ -5,6 +5,6 @@ end
 json.conductors do
   json.partial! 'api/conductors/conductor', collection: concert.conductors, as: :conductor
 end
-json.hole do
-  json.partial! 'api/holes/hole', hole: concert.hole
+json.repertoires do
+  json.partial! 'api/repertoires/repertoire', collection: concert.repertoires, as: :repertoire
 end
