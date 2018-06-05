@@ -8,6 +8,7 @@ class CreateConcerts < ActiveRecord::Migration[5.1]
       t.text :description
 
       t.belongs_to :team, foreign_key: true, type: :uuid, null: false
+      t.belongs_to :hole, null: false
 
       t.timestamps
     end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post 'teams/:id/login', to: 'teams#login'
     resources :concerts
     resources :conductors
+    resources :holes
     resources :types, onry:[:index, :show]
     resources :instruments, onry:[:index, :show]
     resources :instrument_categories, onry:[:index, :show]

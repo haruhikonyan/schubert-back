@@ -14,4 +14,5 @@
 
 class Hole < ApplicationRecord
   belongs_to :region
+  has_many :concert
 end
