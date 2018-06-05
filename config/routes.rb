@@ -5,7 +5,13 @@ Rails.application.routes.draw do
     resources :recruits
     resources :teams
     post 'teams/:id/login', to: 'teams#login'
-
+    resources :concerts
+    resources :conductors
+    resources :holes
+    resources :countries
+    resources :composers
+    resources :tunes
+    resources :solists
     resources :types, onry:[:index, :show]
     resources :instruments, onry:[:index, :show]
     resources :instrument_categories, onry:[:index, :show]
