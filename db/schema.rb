@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603071119) do
+ActiveRecord::Schema.define(version: 20180606140037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20180603071119) do
   end
 
   create_table "composers", force: :cascade do |t|
-    t.string "last_name", null: false
+    t.string "display_name", null: false
     t.string "full_name"
     t.text "description"
     t.datetime "created_at", null: false
@@ -83,8 +83,10 @@ ActiveRecord::Schema.define(version: 20180603071119) do
     t.time "cirtain_time", null: false
     t.text "description"
     t.uuid "team_id", null: false
+    t.bigint "hole_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hole_id"], name: "index_concerts_on_hole_id"
     t.index ["team_id"], name: "index_concerts_on_team_id"
   end
 
@@ -151,6 +153,8 @@ ActiveRecord::Schema.define(version: 20180603071119) do
     t.uuid "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "concert_id"
+    t.index ["concert_id"], name: "index_recruits_on_concert_id"
     t.index ["team_id"], name: "index_recruits_on_team_id"
   end
 
