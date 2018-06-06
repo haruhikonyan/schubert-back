@@ -9,6 +9,7 @@
 #  cirtain_time :time             not null
 #  description  :text
 #  team_id      :uuid             not null
+#  hole_id      :bigint(8)        not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

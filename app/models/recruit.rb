@@ -12,6 +12,7 @@
 #  team_id        :uuid             not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  concert_id     :uuid
 #
 
 class Recruit < ApplicationRecord
@@ -19,6 +20,8 @@ class Recruit < ApplicationRecord
   accepts_nested_attributes_for :team
   has_many :recruit_instruments
   has_many :instruments, :through => :recruit_instruments
+
+  belongs_to :concert
 
   scope :has_instrument_ids, -> instrument_ids {
     joins(:instruments).where('instruments.id IN (?)', instrument_ids)
