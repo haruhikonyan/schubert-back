@@ -1,4 +1,5 @@
 class Api::ConcertsController < ApplicationController
+  before_action :authenticate!, only: [:update, :destroy]
   before_action :set_concert, only: [:show, :update, :destroy]
 
   # GET /concerts
@@ -15,10 +16,10 @@ class Api::ConcertsController < ApplicationController
   # POST /concerts
   # POST /concerts.json
   def create
-    @concert = Concert.new(concert_params)
+    @concert = Concert.new(concert_savable_params)
 
     if @concert.save
-      render :show, status: :created, location: @concert
+      render :show, status: :created
     else
       render json: @concert.errors, status: :unprocessable_entity
     end
@@ -27,8 +28,11 @@ class Api::ConcertsController < ApplicationController
   # PATCH/PUT /concerts/1
   # PATCH/PUT /concerts/1.json
   def update
-    if @concert.update(concert_params)
-      render :show, status: :ok, location: @concert
+    # TODO エラーハンドリングを共通化する
+    if @current_team&.id != @concert.team.id
+      render json: false, status: :unauthorized
+    elsif @concert.update(concert_savable_params)
+      render :show, status: :ok
     else
       render json: @concert.errors, status: :unprocessable_entity
     end
@@ -37,7 +41,12 @@ class Api::ConcertsController < ApplicationController
   # DELETE /concerts/1
   # DELETE /concerts/1.json
   def destroy
-    @concert.destroy
+    # TODO エラーハンドリングを共通化する
+    if @current_team&.id != @concert.team.id
+      render json: false, status: :unauthorized
+    else
+      @concert.destroy
+    end
   end
 
   private
@@ -47,7 +56,37 @@ class Api::ConcertsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def concert_params
-      params.fetch(:concert, {})
+    # 破壊的なのでデバッグ時注意
+    def concert_savable_params
+      concert_params = params[:concert].try!(:permit!)
+      concert_params[:conductor_ids] = concert_params[:conductors].pluck(:id)
+      concert_params.delete :conductors
+      concert_params[:hole_id] = params[:concert][:hole][:id]
+      concert_params.delete :hole
+
+      # 曲目
+      repertoires_params = concert_params[:repertoires]
+      repertoires_params.each do |repertoire_params| 
+        # 曲名
+        repertoire_params[:tune_id] = repertoire_params[:tune][:id]
+        repertoire_params.delete :tune
+        # ソリスト
+        repertoire_params[:solist_ids] = repertoire_params[:solists].pluck(:id)
+        repertoire_params.delete :solists
+      end
+      concert_params[:repertoires_attributes] = concert_params.delete :repertoires
+      # tema.id がある場合
+      if params[:concert][:team][:id].present?
+        concert_params[:team_id] = params[:concert][:team][:id]
+        concert_params.delete :team
+      else
+        team_params[:type_ids] = team_params[:types].pluck(:id)
+        team_params.delete :types
+        team_params[:region_ids] = team_params[:regions].pluck(:id)
+        team_params.delete :regions
+        
+        concert_params[:team_attributes] = concert_params.delete :team
+      end
+      concert_params      
     end
 end

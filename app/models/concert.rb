@@ -21,4 +21,5 @@ class Concert < ApplicationRecord
   has_many :concert_conductors
   has_many :conductors, :through => :concert_conductors
   has_many :repertoires
+  accepts_nested_attributes_for :repertoires, allow_destroy: true
 end
