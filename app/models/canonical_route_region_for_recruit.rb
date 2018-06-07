@@ -3,6 +3,7 @@
 # Table name: canonical_route_region_for_recruits
 #
 #  id         :bigint(8)        not null, primary key
+#  region_id  :bigint(8)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

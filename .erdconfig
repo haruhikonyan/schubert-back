@@ -1,0 +1,9 @@
+attributes:
+  - foreign_keys
+  - primary_keys
+  - content
+  - inheritance
+notation: bachman
+polymorphism: true
+exclude:
+  - 'ApplicationRecord'
