@@ -32,19 +32,21 @@ ActiveRecord::Schema.define(version: 20180606140037) do
   end
 
   create_table "canonical_route_region_for_recruits", force: :cascade do |t|
+    t.bigint "region_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_canonical_route_region_for_recruits_on_region_id"
   end
 
   create_table "canonical_routes", force: :cascade do |t|
     t.string "canonical_routable_type"
     t.bigint "canonical_routable_id"
-    t.string "path"
-    t.string "label"
-    t.string "category"
+    t.string "path", null: false
+    t.string "label", null: false
+    t.string "category", null: false
     t.integer "order_in_Category"
-    t.boolean "is_listed_on_top"
-    t.boolean "is_listed_on_model_top"
+    t.boolean "is_listed_on_top", default: false
+    t.boolean "is_listed_on_model_top", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["canonical_routable_type", "canonical_routable_id"], name: "index_canonical_routes"
