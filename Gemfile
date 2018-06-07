@@ -87,6 +87,7 @@ group :development do
   gem 'annotate'
   # Add comments to your Gemfile with each dependency's description. (https://github.com/ivantsepp/annotate_gem)
   gem 'annotate_gem'
+  gem 'rails-erd'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
