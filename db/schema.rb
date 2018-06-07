@@ -156,7 +156,6 @@ ActiveRecord::Schema.define(version: 20180606140037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "concert_id"
-    t.index ["concert_id"], name: "index_recruits_on_concert_id"
     t.index ["team_id"], name: "index_recruits_on_team_id"
   end
 

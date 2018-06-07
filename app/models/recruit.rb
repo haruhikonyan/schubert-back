@@ -21,7 +21,7 @@ class Recruit < ApplicationRecord
   has_many :recruit_instruments
   has_many :instruments, :through => :recruit_instruments
 
-  belongs_to :concert
+  belongs_to :concert, required: false
 
   scope :has_instrument_ids, -> instrument_ids {
     joins(:instruments).where('instruments.id IN (?)', instrument_ids)
