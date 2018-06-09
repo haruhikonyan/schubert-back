@@ -18,8 +18,9 @@ Region.create(name: '東京都内', sort_number: 1)
 Region.create(name: '関東甲信越', sort_number: 2)
 Region.create(name: '北海道・東北', sort_number: 3)
 Region.create(name: '中部', sort_number: 4)
-Region.create(name: '近畿・中国・四国', sort_number: 5)
-Region.create(name: '九州', sort_number: 6)
+Region.create(name: '近畿', sort_number: 5)
+Region.create(name: '中国・四国', sort_number: 6)
+Region.create(name: '九州', sort_number: 7)
 Region.create(name: '海外', sort_number: 10)
 
 InstrumentCategory.create(name: '木管楽器')
@@ -83,3 +84,24 @@ Tune.create(title: '交響曲第1番 ト短調 op.13「冬の日の幻想」', d
 Tune.create(title: '交響曲第2番 ハ短調 op.17「小ロシア」', description: 'チャイコフスキー２番目の交響曲', composer: Composer.find_by(display_name: 'チャイコフスキー'))
 
 Solist.create(name: '北村源三', url: 'https://ja.wikipedia.org/wiki/%E5%8C%97%E6%9D%91%E6%BA%90%E4%B8%89', description: '元NHK交響楽団首席トランペット奏者', instrument: Instrument.find_by(name: 'トランペット'))
+
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "フルート")], canonical_route: CanonicalRoute.create(path: 'instrument/fl', label: 'フルート', category: 'instrument', order_in_Category: 1, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "オーボエ")], canonical_route: CanonicalRoute.create(path: 'instrument/ob', label: 'オーボエ', category: 'instrument', order_in_Category: 2, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "クラリネット")], canonical_route: CanonicalRoute.create(path: 'instrument/cl', label: 'クラリネット', category: 'instrument', order_in_Category: 3, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "ファゴット")], canonical_route: CanonicalRoute.create(path: 'instrument/fg', label: 'ファゴット', category: 'instrument', order_in_Category: 4, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "ホルン")], canonical_route: CanonicalRoute.create(path: 'instrument/hr', label: 'ホルン', category: 'instrument', order_in_Category: 5, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "トランペット")], canonical_route: CanonicalRoute.create(path: 'instrument/tp', label: 'トランペット', category: 'instrument', order_in_Category: 6, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "トロンボーン")], canonical_route: CanonicalRoute.create(path: 'instrument/tb', label: 'トロンボーン', category: 'instrument', order_in_Category: 7, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "チューバ")], canonical_route: CanonicalRoute.create(path: 'instrument/tu', label: 'チューバ', category: 'instrument', order_in_Category: 8, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteInstrumentsForRecruit.create(instruments: [Instrument.find_by(name: "パーカッション")], canonical_route: CanonicalRoute.create(path: 'instrument/perc', label: 'パーカッション', category: 'instrument', order_in_Category: 9, is_listed_on_top: true, is_listed_on_model_top: true))
+
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '東京都内'), canonical_route: CanonicalRoute.create(path: 'region/tokyo', label: '東京都内', category: 'region', order_in_Category: 1, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '関東甲信越'), canonical_route: CanonicalRoute.create(path: 'region/kanto', label: '関東甲信越', category: 'region', order_in_Category: 2, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '北海道・東北'), canonical_route: CanonicalRoute.create(path: 'region/hokkaido-tohoku', label: '北海道・東北', category: 'region', order_in_Category: 3, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '中部'), canonical_route: CanonicalRoute.create(path: 'region/chubu', label: '中部', category: 'region', order_in_Category: 4, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '近畿'), canonical_route: CanonicalRoute.create(path: 'region/kinki', label: '近畿', category: 'region', order_in_Category: 5, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '中国・四国'), canonical_route: CanonicalRoute.create(path: 'region/tyugoku-shikoku', label: '中国・四国', category: 'region', order_in_Category: 5, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '九州'), canonical_route: CanonicalRoute.create(path: 'region/kyushu', label: '九州', category: 'region', order_in_Category: 6, is_listed_on_top: true, is_listed_on_model_top: true))
+CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '海外'), canonical_route: CanonicalRoute.create(path: 'region/overseas', label: '海外', category: 'region', order_in_Category: 10, is_listed_on_top: true, is_listed_on_model_top: true))
+
+
