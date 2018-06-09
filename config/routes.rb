@@ -16,5 +16,6 @@ Rails.application.routes.draw do
     resources :instruments, onry:[:index, :show]
     resources :instrument_categories, onry:[:index, :show]
     resources :regions, onry:[:index, :show]
+    resources :canonical_routes
   end
 end
