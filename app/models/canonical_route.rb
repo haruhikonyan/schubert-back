@@ -17,4 +17,7 @@
 
 class CanonicalRoute < ApplicationRecord
   belongs_to :canonical_routable, polymorphic: true
+  scope :has_category, -> category {
+    where(category: category)
+  }
 end

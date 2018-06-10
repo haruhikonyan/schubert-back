@@ -7,6 +7,11 @@ class Api::CanonicalRoutesController < ApplicationController
     @canonical_routes = CanonicalRoute.all
   end
 
+  def get_by_category
+    @canonical_routes = CanonicalRoute.has_category(params[:category])
+    render :index, status: :ok
+  end
+
   # GET /canonical_routes/1
   # GET /canonical_routes/1.json
   def show
