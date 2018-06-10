@@ -41,7 +41,8 @@ ActiveRecord::Schema.define(version: 20180606140037) do
   create_table "canonical_routes", force: :cascade do |t|
     t.string "canonical_routable_type"
     t.bigint "canonical_routable_id"
-    t.string "path", null: false
+    t.string "canonical_id", null: false
+    t.string "canonical_model_name", null: false
     t.string "label", null: false
     t.string "category", null: false
     t.integer "order_in_Category"

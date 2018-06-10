@@ -2,7 +2,8 @@ class CreateCanonicalRoutes < ActiveRecord::Migration[5.1]
   def change
     create_table :canonical_routes do |t|
       t.references :canonical_routable, polymorphic: true, index: {name: "index_canonical_routes"}
-      t.string :path, null: false
+      t.string :canonical_id, null: false
+      t.string :canonical_model_name, null: false
       t.string :label, null: false
       t.string :category, null: false
       t.integer :order_in_Category
