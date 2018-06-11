@@ -15,6 +15,11 @@ class Api::RecruitsController < ApplicationController
     @recruits = query.order(updated_at: :desc)
   end
 
+  def search_by_canonical
+    @recruits = CanonicalRoute.find(params[:canonical_route_id]).search_recruits
+    render :index, status: :ok
+  end
+
   # GET /recruits/1
   # GET /recruits/1.json
   def show

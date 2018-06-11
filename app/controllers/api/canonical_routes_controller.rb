@@ -1,15 +1,10 @@
 class Api::CanonicalRoutesController < ApplicationController
-  before_action :set_canonical_route, only: [:show, :update, :destroy, :search_recruits]
+  before_action :set_canonical_route, only: [:show, :update, :destroy]
 
   # GET /canonical_routes
   # GET /canonical_routes.json
   def index
     @canonical_routes = CanonicalRoute.all
-  end
-
-  def search_recruits
-    @recruits = @canonical_route.search_recruits
-    render 'api/recruits/index', status: :ok
   end
 
   # GET /canonical_routes/1

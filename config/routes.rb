@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     # TODO 絞ったり新しく作ったり
     resources :recruits
+    get 'recruits/search-by-canonical/:canonical_route_id', to: 'recruits#search_by_canonical'
     resources :teams
     post 'teams/:id/login', to: 'teams#login'
     resources :concerts
@@ -17,6 +18,5 @@ Rails.application.routes.draw do
     resources :instrument_categories, onry:[:index, :show]
     resources :regions, onry:[:index, :show]
     resources :canonical_routes
-    get 'canonical_routes/:id/search-recruits', to: 'canonical_routes#search_recruits'
   end
 end
