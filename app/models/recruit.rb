@@ -30,6 +30,10 @@ class Recruit < ApplicationRecord
   scope :has_type_ids, -> type_ids {
     joins(team: :types).where('types.id IN (?)', type_ids)
   }
+
+  scope :has_region_ids, -> region_ids {
+    joins(team: :regions).where('regions.id IN (?)', region_ids)
+  }
   # もっとスマートにかける？
   scope :is_published, -> {
     now = DateTime.now
