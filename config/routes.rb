@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     # TODO 絞ったり新しく作ったり
     resources :recruits
-    get 'recruits/search-by-canonical/:canonical_route_id', to: 'recruits#search_by_canonical'
+    get 'recruits/search-by-canonical/:canonical_model_name/:canonical_id', to: 'recruits#search_by_canonical'
     resources :teams
     post 'teams/:id/login', to: 'teams#login'
     resources :concerts

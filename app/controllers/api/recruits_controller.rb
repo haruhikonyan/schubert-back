@@ -16,7 +16,8 @@ class Api::RecruitsController < ApplicationController
   end
 
   def search_by_canonical
-    @recruits = CanonicalRoute.find(params[:canonical_route_id]).search_recruits
+    cr = CanonicalRoute.find_by(canonical_model_name: params[:canonical_model_name], canonical_id: params[:canonical_id])
+    @recruits = cr ? cr.search_recruits : []
     render :index, status: :ok
   end
 
