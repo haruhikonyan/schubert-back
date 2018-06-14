@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     # TODO 絞ったり新しく作ったり
     resources :recruits
     get 'recruits/search-by-canonical/:canonical_model_name/:canonical_id', to: 'recruits#search_by_canonical'
+    get 'recruits/team/:team_id', to: 'recruits#recruits_by_team'
     resources :teams
     post 'teams/:id/login', to: 'teams#login'
     resources :concerts

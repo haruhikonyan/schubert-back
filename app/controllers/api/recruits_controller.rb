@@ -17,7 +17,16 @@ class Api::RecruitsController < ApplicationController
 
   def search_by_canonical
     cr = CanonicalRoute.find_by(canonical_model_name: params[:canonical_model_name], canonical_id: params[:canonical_id])
+    公開してるもののみ返すようにする
     @recruits = cr ? cr.search_recruits : []
+    render :index, status: :ok
+  end
+
+  def recruits_by_team
+    team_id = params[:team_id]
+    recruits = Recruit.where(team_id: team_id)
+    # 認証が成功していたら全ての募集を返して、認証できていなければ公開されてるもののみ返す
+    @recruits = @current_team&.id == team_id ? recruits : recruits.is_published
     render :index, status: :ok
   end
 
