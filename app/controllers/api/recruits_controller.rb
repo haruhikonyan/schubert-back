@@ -17,7 +17,7 @@ class Api::RecruitsController < ApplicationController
 
   def search_by_canonical
     cr = CanonicalRoute.find_by(canonical_model_name: params[:canonical_model_name], canonical_id: params[:canonical_id])
-    公開してるもののみ返すようにする
+    # 公開してるもののみ返すようにする
     @recruits = cr ? cr.search_recruits : []
     render :index, status: :ok
   end
