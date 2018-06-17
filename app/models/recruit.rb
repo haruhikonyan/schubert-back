@@ -51,6 +51,7 @@ class Recruit < ApplicationRecord
       else
         recruits = recruits.search_free_word(word)
       end
+      break if recruits.blank?
     end
     recruits
   }
