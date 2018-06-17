@@ -40,8 +40,22 @@ class Recruit < ApplicationRecord
     where("published_from <= ?", now).where("published_to >= ?", now)
   }
 
-  # TODO 複数キーワード対応
+  # 複数キーワード検索(仮)
   # ゆくゆくは ES 入れたい
+  scope :search_free_words, -> words {
+    recruits = []
+    # see https://qiita.com/nao58/items/bf5d017a06fc33da9e3b
+    words.split(/[[:blank:]]+/).each_with_index do |word, index|
+      if index == 0
+        recruits = Recruit.search_free_word(word)
+      else
+        recruits = recruits.search_free_word(word)
+      end
+    end
+    recruits
+  }
+
+  # 単体キーワード検索
   scope :search_free_word, -> word {
     w = "%#{word}%"
     joins(:team).where("(recruits.title LIKE ?) or (recruits.description LIKE ?) or (recruits.practice_place LIKE ?) or (recruits.practice_time LIKE ?) or (teams.name LIKE ?)", w, w, w, w, w)

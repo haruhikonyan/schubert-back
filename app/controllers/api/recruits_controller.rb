@@ -9,7 +9,7 @@ class Api::RecruitsController < ApplicationController
     # type はもしかしたらand検索がいいのか？
     query = query.has_type_ids(params[:type_ids]) if params[:type_ids].present?
     query = query.has_instrument_ids(params[:instrument_ids]) if params[:instrument_ids].present?
-    query = query.search_free_word(params[:free_word]) if params[:free_word].present?
+    query = query.search_free_words(params[:free_words]) if params[:free_words].present?
 
     # オフセットに対応させる
     @recruits = query.order(updated_at: :desc)
