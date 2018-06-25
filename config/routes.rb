@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :teams
     post 'teams/:id/login', to: 'teams#login'
     resources :concerts
+    get 'concerts/team/:team_id', to: 'concerts#concerts_by_team'
     resources :conductors
     resources :holes
     resources :countries

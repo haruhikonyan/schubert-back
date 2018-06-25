@@ -8,6 +8,12 @@ class Api::ConcertsController < ApplicationController
     @concerts = Concert.all
   end
 
+  def concerts_by_team
+    team_id = params[:team_id]
+    @concerts = Concert.where(team_id: team_id)
+    render :index, status: :ok
+  end
+
   # GET /concerts/1
   # GET /concerts/1.json
   def show
