@@ -84,6 +84,8 @@ class Api::RecruitsController < ApplicationController
       recruit_params = params[:recruit].try!(:permit!)
       recruit_params[:instrument_ids] = recruit_params[:instruments].pluck(:id)
       recruit_params.delete :instruments
+      recruit_params[:concert_id] = recruit_params[:concert]
+      recruit_params.delete :concert
       team_params = recruit_params[:team]
       # tema.id がある場合
       if params[:recruit][:team][:id].present?
