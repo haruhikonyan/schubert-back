@@ -1,5 +1,5 @@
 class Api::RecruitsController < ApplicationController
-  before_action :authenticate!, only: [:update, :destroy]
+  before_action :authenticate!, only: [:create, :update, :destroy]
   before_action :set_recruit, only: [:show, :update, :destroy]
 
   # GET /recruits

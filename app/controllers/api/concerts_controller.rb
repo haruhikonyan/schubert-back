@@ -22,6 +22,7 @@ class Api::ConcertsController < ApplicationController
   # POST /concerts
   # POST /concerts.json
   def create
+    # TODO 既存 team を含めて保存する場合は認証に対応させる
     @concert = Concert.new(concert_savable_params)
 
     if @concert.save
