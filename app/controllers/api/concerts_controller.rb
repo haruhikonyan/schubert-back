@@ -1,5 +1,5 @@
 class Api::ConcertsController < ApplicationController
-  before_action :authenticate!, only: [:update, :destroy]
+  before_action :authenticate!, only: [:create, :update, :destroy]
   before_action :set_concert, only: [:show, :update, :destroy]
 
   # GET /concerts
@@ -67,7 +67,7 @@ class Api::ConcertsController < ApplicationController
       concert_params = params[:concert].try!(:permit!)
       concert_params[:conductor_ids] = concert_params[:conductors].pluck(:id)
       concert_params.delete :conductors
-      concert_params[:hole_id] = params[:concert][:hole][:id]
+      concert_params[:hole_id] = concert_params[:hole][:id]
       concert_params.delete :hole
 
       # 曲目
@@ -81,9 +81,10 @@ class Api::ConcertsController < ApplicationController
         repertoire_params.delete :solists
       end
       concert_params[:repertoires_attributes] = concert_params.delete :repertoires
+      team_params = concert_params[:team]
       # tema.id がある場合
-      if params[:concert][:team][:id].present?
-        concert_params[:team_id] = params[:concert][:team][:id]
+      if concert_params[:team][:id].present?
+        concert_params[:team_id] = concert_params[:team][:id]
         concert_params.delete :team
       else
         team_params[:type_ids] = team_params[:types].pluck(:id)

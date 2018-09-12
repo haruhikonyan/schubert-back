@@ -89,7 +89,7 @@ class Api::RecruitsController < ApplicationController
       team_params = recruit_params[:team]
       # tema.id がある場合
       if params[:recruit][:team][:id].present?
-        recruit_params[:team_id] = params[:recruit][:team][:id]
+        recruit_params[:team_id] = recruit_params[:team][:id]
         recruit_params.delete :team
       else
         team_params[:type_ids] = team_params[:types].pluck(:id)
