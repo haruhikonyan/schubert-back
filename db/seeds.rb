@@ -106,4 +106,7 @@ CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '中国・四
 CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '九州'), canonical_route: CanonicalRoute.create(canonical_id: 'kyushu', label: '九州', canonical_model_name: 'regions', category: 'region', order_in_Category: 6, is_listed_on_top: true, is_listed_on_model_top: true))
 CanonicalRouteRegionForRecruit.create(region: Region.find_by(name: '海外'), canonical_route: CanonicalRoute.create(canonical_id: 'overseas', label: '海外', canonical_model_name: 'regions', category: 'region', order_in_Category: 10, is_listed_on_top: true, is_listed_on_model_top: true))
 
+Concert.create(title: 'title', date: Date.new, doors_open: Date.new, cirtain_time: Date.new,description: 'hoge', team: Team.first, hole_id: 1, conductor_ids: [1])
+Repertoire.create(arranger: 'アレンジャー', description: '曲の 説明', concert: Concert.first, tune: Tune.first, solist_ids: [1])
+
 

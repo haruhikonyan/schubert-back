@@ -8,7 +8,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # Full-stack web application framework. (http://rubyonrails.org)
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2.1'
 # Use postgresql as the database for Active Record
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
 gem 'pg', '>= 0.18', '< 2.0'
