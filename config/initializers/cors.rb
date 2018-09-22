@@ -9,7 +9,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # , 区切りのドメインが指定されることを前提
     allow_origin_list = Rails.application.config.x.cors_allowed_origins.split(",")
-    origins *allow_origin_list
+    # origins *allow_origin_list
+    origins '*'
 
     resource '*',
       headers: :any,
