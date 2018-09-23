@@ -15,7 +15,10 @@ module SchubertBack
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     
-    config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'schubert-front.haruhiko.work,schubert-front.herokuapp.com')
+    # config.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'schubert-front.haruhiko.work,schubert-front.herokuapp.com')
+    # TODO 正しいドメイン設定
+    config.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', '*')
+
 
     # api レスポンスをすべてキャメルケースに変換
     Jbuilder.key_format camelize: :lower

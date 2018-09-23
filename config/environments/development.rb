@@ -51,6 +51,9 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # TODO 正しいドメインを入れる
   # 開発もdemo向けるべきかなぁ？
-  config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'localhost:4200')
+  # config.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'localhost:4200')
+  config.cors_allowed_origins = ENV.fetch('*')
+
 end
